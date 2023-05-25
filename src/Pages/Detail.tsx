@@ -29,7 +29,7 @@ const Detail = () => {
             });
         };
         getDetail();
-  }, []);
+  }, [id, setLoader, setData]);
 
   return (
     <>
