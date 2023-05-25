@@ -12,25 +12,25 @@ const Detail = () => {
   const id: any = searchParams.get("id");
 
   useEffect(() => {
-    getDetail();
+      const getDetail = async () => {
+          const url: string = `https://api.themoviedb.org/3/movie/${id}`;
+          setLoader(true);
+          axios
+          .get(url, {
+              headers: {
+                  Accept: "application/json",
+                  Authorization:
+                  "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNDA4ZGYwZmY1ZTk2NzA5MDk2ZDYyMjY0OTc3Zjg5MSIsInN1YiI6IjY0NmVlYzZmMTEzMGJkMDFmYTFmNzg4NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.M_sfAKYjeruUUmXowANzBkGYRZrcxdVVTHfH2Oyrpj0",
+                },
+            })
+            .then(function (response) {
+                setLoader(false);
+                setData(response.data);
+            });
+        };
+        getDetail();
   }, []);
 
-  const getDetail = async () => {
-    const url: string = `https://api.themoviedb.org/3/movie/${id}`;
-    setLoader(true);
-    axios
-      .get(url, {
-        headers: {
-          Accept: "application/json",
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNDA4ZGYwZmY1ZTk2NzA5MDk2ZDYyMjY0OTc3Zjg5MSIsInN1YiI6IjY0NmVlYzZmMTEzMGJkMDFmYTFmNzg4NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.M_sfAKYjeruUUmXowANzBkGYRZrcxdVVTHfH2Oyrpj0",
-        },
-      })
-      .then(function (response) {
-        setLoader(false);
-        setData(response.data);
-      });
-  };
   return (
     <>
       <section className="bg-white pb-10 md:pb-32 pt-5">
